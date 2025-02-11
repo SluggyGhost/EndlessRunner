@@ -1,6 +1,6 @@
 /*********************************************************************
  * AUTHOR: Joshua Acosta
- * TITLE: 'NeoNightRun'
+ * TITLE: 'Infinite Sky'
  * DESC: 
  * CREATED: 2/3/25
  * UPDATED: 2/10/25
@@ -12,10 +12,10 @@
 
 let config = {
     type: Phaser.AUTO,
-    width: 160,
-    height: 90,
+    width: 640,
+    height: 360,
     pixelArt: true, // toggle for Pixel Art
-    zoom: 5,
+    zoom: 3,
     physics: {
         default: "arcade",
         arcade: {

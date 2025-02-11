@@ -22,9 +22,6 @@ class Load extends Phaser.Scene {
         // load audio assets
 // TODO: find audio
         // load font(s)
-        this.load.bitmapFont('digital', 'fonts/DigitalRegular.png', 'fonts/DeadRevolverDigital.json')
-        this.load.bitmapFont('display', 'fonts/DisplayRegular.png', 'fonts/DeadRevolverDisplay.json')
-        this.load.bitmapFont('text', 'fonts/GameRegular.png', 'fonts/DeadRevolverGame.json')
     }
 
     create() {
