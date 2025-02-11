@@ -9,23 +9,71 @@ class Hero extends Phaser.Physics.Arcade.Sprite {
         this.body.setCollideWorldBounds(true)
 
         // set custom hero properties
-        this.direction = direction
-        this.hurtTimer = 250        // in ms
 
         // initialize state machine managing hero (initial state, possible states, state args[])
         scene.heroFSM = new StateMachine('idle', {
             idle: new IdleState(),
-            running: new RunningState(),
-            jumping: new JumpingState(),
-            sliding: new SlidingState(),
-            hurt: new HurtState(),
-            dead: new DeadState()
+            jump: new JumpState(),
+            knockback: new KnockbackState(),
+            land: new LandState(),
+            roll: new RollState(),
+            run: new RunState(),
         }, [scene, this])   // pass these as arguments to maintain scene/object context in the FSM
     }
 }
 
 // hero-specific state classes
 class IdleState extends State {
+    enter(scene, hero) {
+
+    }
+
+    execute(scene, hero) {
+        
+    }
+}
+
+class JumpState extends State {
+    enter(scene, hero) {
+
+    }
+
+    execute(scene, hero) {
+        
+    }
+}
+
+class KnockbackState extends State {
+    enter(scene, hero) {
+
+    }
+
+    execute(scene, hero) {
+        
+    }
+}
+
+class LandState extends State {
+    enter(scene, hero) {
+
+    }
+
+    execute(scene, hero) {
+        
+    }
+}
+
+class RollState extends State {
+    enter(scene, hero) {
+
+    }
+
+    execute(scene, hero) {
+        
+    }
+}
+
+class RunState extends State {
     enter(scene, hero) {
 
     }
