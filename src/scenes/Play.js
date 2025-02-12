@@ -10,4 +10,9 @@ class Play extends Phaser.Scene {
     create() {}
 
     update() {}
+
+    handleGameOver() {
+        // stop background music & sounds
+        // if(this.bg)
+    }
 }
