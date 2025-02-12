@@ -7,7 +7,25 @@ class Menu extends Phaser.Scene {
 
     preload() {}
 
-    create() {}
+    create() {
+        let menuConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
 
-    update() {}
+        this.skybox = this.add.tileSprite(0, 0, w, h, 'sky').setOrigin(0,0)
+        this.add.text(centerX, centerY, 'MAIN MENU', menuConfig).setOrigin(0.5)
+    }
+
+    update() {
+        this.skybox.tilePositionY += 5
+    }
 }
