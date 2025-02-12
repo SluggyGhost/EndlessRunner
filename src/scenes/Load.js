@@ -20,7 +20,14 @@ class Load extends Phaser.Scene {
         // load graphics assets
         this.load.image('player', 'sprites/skydiver.png')
         this.load.image('sky', 'sprites/skybox.png')
-        
+        this.load.image('balloon', 'sprites/Balloon.png')
+        this.load.image('blimp', 'sprites/blimp.png')
+        this.load.image('cloud1', 'sprites/cloud1.png')
+        this.load.image('cloud2', 'sprites/cloud2.png')
+        this.load.spritesheet('bats', 'sprites/bats.png', {
+            frameWidth: 29,
+            frameHeight: 25,
+        })
         // load audio assets
         this.load.audio('bgMusic', 'audio/ThreeRedHearts-Go(NoVocal).ogg')
         this.load.audio('wind', 'audio/wind.wav')
