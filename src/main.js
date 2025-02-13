@@ -27,10 +27,6 @@ let config = {
 
 const game = new Phaser.Game(config);
 
-// reserve keyboard bindings
-
-// set UI sizes
-
 // define global variables
 let centerX = game.config.width/2;
 let centerY = game.config.height/2;
