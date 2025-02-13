@@ -8,11 +8,10 @@ class Menu extends Phaser.Scene {
     preload() {}
 
     create() {
-        let menuConfig = {
+        let titleConfig = {
             fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
+            fontSize: '36px',
+            color: '#ffe135',
             align: 'right',
             padding: {
                 top: 5,
@@ -21,16 +20,17 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
         }
 
-        this.skybox = this.add.tileSprite(0, 0, w, h, 'sky').setOrigin(0,0)
-        this.add.text(centerX, centerY, 'MAIN MENU', menuConfig).setOrigin(0.5)
+        // this.skybox = this.add.tileSprite(0, 0, w, h, 'sky').setOrigin(0,0)
+        this.add.rectangle(centerX, centerY, w, h, 0x87ceeb)
+        this.add.text(centerX, centerY / 2, 'INFINITE SKY', titleConfig).setOrigin(0.5)
 
         // Menu buttons
-        new Button(this, 400, 250, 'Play', () => this.scene.start('playScene'));
-        new Button(this, 400, 320, 'Options', () => this.scene.start('optionsScene'));
-        new Button(this, 400, 390, 'Credits', () => this.scene.start('creditsScene'));
+        new Button(this, centerX, centerY * 5/4, 'Play', () => this.scene.start('playScene'));
+        new Button(this, centerX, centerY * 6/4, 'Options', () => this.scene.start('optionsScene'));
+        new Button(this, centerX, centerY * 7/4, 'Credits', () => this.scene.start('creditsScene'));
     }
 
     update() {
-        this.skybox.tilePositionY += 5
+        // this.skybox.tilePositionY += 5
     }
 }
