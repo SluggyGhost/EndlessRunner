@@ -42,8 +42,14 @@ class Load extends Phaser.Scene {
 
     create() {
         // check for local storage browser support
-        if(window.localStorage) {
-            console.log('Local storage supported');
+        // if(window.localStorage) {
+        //     console.log('Local storage supported');
+        // }
+        if(typeof(Storage) !== 'undefined') {
+            let storedHighScore = localStorage.getItem('highScore')
+            if(storedHighScore !== null) {
+                highScore = parseInt(storedHighScore)
+            }
         }
 
         // go to Menu scene

@@ -36,5 +36,4 @@ let centerX = game.config.width/2;
 let centerY = game.config.height/2;
 let w = game.config.width;
 let h = game.config.height;
-let highScore = 0;
-let newHighScore = false;
+var highScore = 0;  // default value (global access)

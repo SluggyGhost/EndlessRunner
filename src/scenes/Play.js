@@ -3,11 +3,15 @@ class Play extends Phaser.Scene {
         super('playScene')
     }
 
-    init() {}
+    init() {
+        this.clock = 0;
+        this.newHighScore = false;
+    }
 
     preload() {}
 
     create() {
+
         // Skybox
         this.skybox = this.add.tileSprite(0, 0, w, h, 'sky').setOrigin(0,0)
 
@@ -30,18 +34,26 @@ class Play extends Phaser.Scene {
             loop: true
         })
 
-        // // Occasionally spawn the meteor
-        // this.time.addEvent({
-        //     delay: 5000,
-        //     callback: this.spawnMeteor,
-        //     callbackScope: this,
-        //     loop: true
-        // })
+        // Display the clock in the top right
+        this.clockText = this.add.text(this.cameras.main.width - 100, 20, '0s', {
+            fontSize: '24px',
+            fill: '#FFF'
+        }).setOrigin(1, 0);
         
         // Add event listener for mouse movement
         this.input.on('pointermove', (pointer) => {
             // Move the player toward the pointer position
             this.physics.moveTo(this.player, pointer.x, pointer.y, 300)
+        })
+
+        // Start counting time
+        this.time.addEvent({
+            delay: 1000,
+            callback: () => {
+                this.clock++
+                this.clockText.setText(this.clock + 's')
+            },
+            loop: true
         })
     }
 
@@ -85,12 +97,15 @@ class Play extends Phaser.Scene {
         obstacle.setCollideWorldBounds(false)
     }
 
-    spawnMeteor() {
-
-    }
-
     hitObstacle(player, obstacle) {
+        if(this.clock > highScore) {
+            highScore = this.clock
+            this.newHighScore = true
+            localStorage.setItem('highScore', highScore)
+        }
+
         console.log('Collision detected!')
+        console.log(highScore)
         player.setTint(0xff0000)
         this.physics.pause()
         // this.scene.restart()
