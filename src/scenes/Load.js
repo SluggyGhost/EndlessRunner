@@ -20,7 +20,8 @@ class Load extends Phaser.Scene {
         // load graphics assets
         this.load.image('instructions', 'sprites/instructions.png')
         this.load.image('player', 'sprites/skydiver.png')
-        this.load.image('sky', 'sprites/skybox.png')
+        this.load.image('sky', 'sprites/cloudysky.png')
+        this.load.image('skybox', 'sprites/skybox.png')
         this.load.image('balloon', 'sprites/Balloon.png')
         this.load.image('blimp', 'sprites/blimp.png')
         this.load.image('cloud1', 'sprites/cloud1.png')

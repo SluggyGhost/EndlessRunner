@@ -61,8 +61,9 @@ class Play extends Phaser.Scene {
         // Display the clock in the top right
         this.clockText = this.add.text(this.cameras.main.width - h/10, 20, '0s', {
             fontSize: '24px',
-            fill: '#FFF'
+            fill: '#000'
         }).setOrigin(1, 0);
+        this.clockText.setDepth(1000)   // Ensure the clock is always on top
         
         // Add event listener for mouse movement
         this.input.on('pointermove', (pointer) => {
@@ -75,7 +76,7 @@ class Play extends Phaser.Scene {
     }
 
     update() {
-        this.skybox.tilePositionY += 10
+        this.skybox.tilePositionY += 1
 
         // Stop player movement when close enough to cursor
         if(Phaser.Math.Distance.Between(this.player.x, this.player.y, this.input.x, this.input.y) < 10) {
@@ -159,7 +160,7 @@ class Play extends Phaser.Scene {
 
         // Results text
         this.results1 = this.add.text(centerX, centerY/2, 'HighScore:', resultsConfig).setOrigin(0.5)
-        this.results2 = this.add.text(centerX, centerY*3/5, highScore, resultsConfig)
+        this.results2 = this.add.text(centerX, centerY*4/5, highScore, resultsConfig).setOrigin(0.5)
         
         // Restart button
         this.restartButton = new Button(this, centerX, centerY * 5/4, 'Restart', () => {

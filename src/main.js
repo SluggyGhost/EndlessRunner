@@ -2,7 +2,7 @@
  * AUTHOR: Joshua Acosta
  * TITLE: 'Infinite Sky'
  * CREATED: 2/3/25
- * UPDATED: 2/13/25
+ * UPDATED: 2/14/25
  * TIME TO COMPLETE: ~30 hours
  * CREATIVE TILT:
  *  - I created a few different prefabs that used different types of
@@ -23,7 +23,7 @@ let config = {
     physics: {
         default: "arcade",
         arcade: {
-            debug: true
+            // debug: true
         }
     },
     scene: [ Load, Menu, HowTo, Credits, Options, Play]

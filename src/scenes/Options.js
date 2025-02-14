@@ -9,7 +9,7 @@ class Options extends Phaser.Scene {
 
     create() {
         // Background
-        this.add.rectangle(centerX, centerY, w, h, 0x87ceeb)
+        this.add.sprite(centerX, centerY, 'sky')
 
         // Text
         this.add.text(centerX*6/7, centerY*3/4, 'MUSIC', textConfig).setOrigin(0.5)

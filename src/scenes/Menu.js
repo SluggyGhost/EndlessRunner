@@ -5,12 +5,12 @@ class Menu extends Phaser.Scene {
 
     init() {}
 
-    preload() {}
+    preload() {
+        this.sceneWhoosh = this.sound.add('whoosh', {volume: 3, rate:3})
+    }
 
     create() {
-        this.sceneWhoosh = this.sound.add('whoosh', {volume: 3, rate:3})
-
-        this.add.rectangle(centerX, centerY, w, h, 0x87ceeb)
+        this.add.sprite(centerX, centerY, 'sky')
         this.add.text(centerX, centerY / 2, 'INFINITE SKY', titleConfig).setOrigin(0.5)
 
         // Menu buttons

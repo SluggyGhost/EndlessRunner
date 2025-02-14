@@ -9,7 +9,7 @@ class Credits extends Phaser.Scene {
 
     create() {
         // background
-        this.add.rectangle(centerX, centerY, w, h, 0x87ceeb)
+        this.add.sprite(centerX, centerY, 'sky')
 
         // text
         this.add.text(centerX, centerY*2/6, 'Created by', titleConfig).setOrigin(0.5)
