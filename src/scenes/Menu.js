@@ -27,13 +27,7 @@ class Menu extends Phaser.Scene {
         new Button(this, centerX, centerY * 5/4, 'Play', () => this.scene.start('playScene'));
         new Button(this, centerX, centerY * 6/4, 'Options', () => this.scene.start('optionsScene'));
         new Button(this, centerX, centerY * 7/4, 'Credits', () => this.scene.start('creditsScene'));
-        new Button(this, centerX/4, centerY * 6.5/4, 'How\nto\nPlay', () => {
-            this.instructions = this.add.sprite(centerX, centerY, 'instructions')
-            this.closeInstructionsButton = new Button(this, this.instructions.width, this.instructions.height * 4/10, 'X', () => {
-                this.instructions.destroy()
-                this.closeInstructionsButton.destroy()
-            })
-        })
+        new Button(this, centerX/4, centerY * 6.5/4, 'How\nto\nPlay', () => this.scene.start('howToScene'))
 
         console.log(highScore)
     }

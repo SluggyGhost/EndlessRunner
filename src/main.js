@@ -3,8 +3,8 @@
  * TITLE: 'Infinite Sky'
  * DESC: 
  * CREATED: 2/3/25
- * UPDATED: 2/10/25
- * TIME TO COMPLETE: 
+ * UPDATED: 2/13/25
+ * TIME TO COMPLETE: ~30 hours
  * CREATIVE TILT:
  *********************************************************************/
 
@@ -22,7 +22,7 @@ let config = {
             debug: true
         }
     },
-    scene: [ Load, Menu, Credits, Options, Play]
+    scene: [ Load, Menu, HowTo, Credits, Options, Play]
 }
 
 const game = new Phaser.Game(config);
