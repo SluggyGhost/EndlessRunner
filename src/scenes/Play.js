@@ -6,12 +6,44 @@ class Play extends Phaser.Scene {
     init() {
         this.clock = 0
         this.newHighScore = false
-        this.spawnRate = 500
+        this.spawnDelay = 800
     }
 
-    preload() {}
+    preload() {
+        this.sfxSlap = this.sound.add('slap', {volume: 3})
+        this.warning = this.sound.add('alert', {volume: 1, rate:2})
+        this.anims.create({
+            key: 'flyingBats',
+            frames: this.anims.generateFrameNumbers('bats', {start: 0, end: 2}),
+            frameRate: 12,
+            repeat: -1
+        })
+    }
 
     create() {
+        // Play music & ambiance
+        if(musicOn){
+            this.bgMusic = this.sound.add('bgMusic', { loop: true, volume: 0 })
+            this.bgMusic.play()
+            this.tweens.add({
+                targets: [this.bgMusic],
+                volume: { from: 0, to: 0.5 }, // Adjust final volume as needed
+                duration: 1000, // 1-second fade-in
+                ease: 'Linear'
+            })
+        }
+        if(sfxOn) {
+            this.ambiance = this.sound.add('wind', { loop: true, volume: 0 })
+            this.ambiance.play()
+            this.tweens.add({
+                targets: [this.ambiance],
+                volume: { from: 0, to: 0.8 }, // Adjust final volume as needed
+                duration: 1000, // 1-second fade-in
+                ease: 'Linear'
+            })
+        }
+
+
         // Skybox
         this.skybox = this.add.tileSprite(0, 0, w, h, 'sky').setOrigin(0,0)
 
@@ -25,14 +57,6 @@ class Play extends Phaser.Scene {
 
         // Add collider between player and obstacles
         this.physics.add.collider(this.player, this.obstacles, this.hitObstacle, null, this)
-
-        // // Randomly spawn obstacles
-        // this.time.addEvent({
-        //     delay: spawnRate,
-        //     callback: this.spawnObstacle,
-        //     callbackScope: this,
-        //     loop: true
-        // })
 
         // Display the clock in the top right
         this.clockText = this.add.text(this.cameras.main.width - h/10, 20, '0s', {
@@ -48,14 +72,6 @@ class Play extends Phaser.Scene {
 
         // Start counting time
         this.startClock()
-        // this.time.addEvent({
-        //     delay: 1000,
-        //     callback: () => {
-        //         this.clock++
-        //         this.clockText.setText(this.clock + 's')
-        //     },
-        //     loop: true
-        // })
     }
 
     update() {
@@ -82,10 +98,16 @@ class Play extends Phaser.Scene {
         const randomType = Phaser.Utils.Array.GetRandom(obstacleTypes)
 
         // Generate random x position
-        const randomX = Phaser.Math.Between(-centerX, w - (h/8))
+        const randomX = Phaser.Math.Between(-centerX/2, w - (h/8))
 
         // Create the obstacle just below the screen
-        let obstacle = this.obstacles.create(randomX, h*1.2, randomType)
+        let obstacle
+        if(randomType == 'bats') {
+            obstacle = this.obstacles.create(randomX, h*1.2, randomType)
+            obstacle.play('flyingBats')
+        } else {
+            obstacle = this.obstacles.create(randomX, h*1.2, randomType)
+        }
 
         // Set physics properties
         obstacle.setVelocityY(-200)
@@ -108,18 +130,65 @@ class Play extends Phaser.Scene {
         }
 
         // console.log('Collision detected!')
-        console.log(highScore)
-        player.setTint(0xff0000)
-        this.physics.pause()
+        // console.log(highScore)
+        player.setTint(0xff0000)    // visual injury
+        this.physics.pause()        // pause all objects
+
+        // SFX
+        if(sfxOn){
+            this.sfxSlap.play()
+        }
+
+        // Fade out music & ambiance
+        if(musicOn) {
+            this.tweens.add({
+                targets: [this.bgMusic],
+                volume: 0,
+                duration: 1,
+                ease: 'Linear'
+            })
+        }
+        if(sfxOn) {
+            this.tweens.add({
+                targets: [this.ambiance],
+                volume: 0,
+                duration: 1,
+                ease: 'Linear'
+            })
+        }
+
+        // Results text
+        this.results1 = this.add.text(centerX, centerY/2, 'HighScore:', resultsConfig).setOrigin(0.5)
+        this.results2 = this.add.text(centerX, centerY*3/5, highScore, resultsConfig)
         
         // Restart button
         this.restartButton = new Button(this, centerX, centerY * 5/4, 'Restart', () => {
+            // Smoothly bring the volume back up
+            if(musicOn){
+                this.tweens.add({
+                    targets: [this.bgMusic],
+                    volume: { from: 0, to: 0.5 }, // Adjust final volume as needed
+                    duration: 1000, // 1-second fade-in
+                    ease: 'Linear'
+                })
+            }
+            if(sfxOn){
+                this.tweens.add({
+                    targets: [this.ambiance],
+                    volume: { from: 0, to: 0.8 }, // Adjust final volume as needed
+                    duration: 1000, // 1-second fade-in
+                    ease: 'Linear'
+                })
+            }
+
             this.player.setPosition(centerX, centerY)
             this.player.setVelocity(0)
             this.player.clearTint()
             this.obstacles.clear(true, true)
             this.physics.resume()
             this.startClock()
+            this.results1.destroy()
+            this.results2.destroy()
             this.restartButton.destroy()
             this.returnButton.destroy()
         });
@@ -132,29 +201,51 @@ class Play extends Phaser.Scene {
 
     startClock() {
         // Start counting time
-        this.clock = 0  // reset the clock
+        this.clock = 0          // reset the clock
+        this.spawnDelay = 800   // reset the spawner; easy difficulty
         this.clockEvent = this.time.addEvent({
             delay: 1000,
             callback: () => {
                 this.clock++
                 this.clockText.setText(this.clock + 's')
+
+                if(this.clock === 15) {
+                    this.warning.play()
+                    this.stopSpawner()
+                    this.spawnDelay = 500   // Medium difficulty
+                    this.startSpawner()
+                }
+                if(this.clock === 60) {
+                    this.warning.play()
+                    this.stopSpawner()
+                    this.spawnDelay = 300   // Hard difficulty
+                    this.startSpawner()
+                }
+                // console.log(this.spawnDelay)
             },
             loop: true
         })
 
-        // Start spawning objects
-        this.spawnEvent = this.time.addEvent({
-            delay: this.spawnRate,
-            callback: this.spawnObstacle,
-            callbackScope: this,
-            loop: true
-        })
+        this.startSpawner()
     }
 
     stopClock() {
         if(this.clockEvent) {
             this.clockEvent.remove()
         }
+        this.stopSpawner()
+    }
+
+    startSpawner() {
+        this.spawnEvent = this.time.addEvent({
+            delay: this.spawnDelay,
+            callback: this.spawnObstacle,
+            callbackScope: this,
+            loop: true
+        })
+    }
+
+    stopSpawner() {
         if(this.spawnEvent) {
             this.spawnEvent.remove()
         }

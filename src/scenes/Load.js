@@ -35,10 +35,9 @@ class Load extends Phaser.Scene {
         this.load.audio('bgMusic', 'audio/ThreeRedHearts-Go(NoVocal).ogg')
         this.load.audio('wind', 'audio/wind.wav')
         this.load.audio('buttonClick', 'audio/button.mp3')
-        this.load.audio('flap', 'audio/flapping-wings.mp3')
         this.load.audio('whoosh', 'audio/whoosh.mp3')
         this.load.audio('slap', 'audio/slap.mp3')
-        this.load.audio('gameOver', 'audio/game-over.mp3')
+        this.load.audio('alert', 'audio/alert.mp3')
         
         // load font(s)
     }

@@ -1,11 +1,15 @@
 /*********************************************************************
  * AUTHOR: Joshua Acosta
  * TITLE: 'Infinite Sky'
- * DESC: 
  * CREATED: 2/3/25
  * UPDATED: 2/13/25
  * TIME TO COMPLETE: ~30 hours
  * CREATIVE TILT:
+ *  - I created a few different prefabs that used different types of
+ *  saved state data, which is something I hadn't done before.
+ *  - I drew all the sprite assets myself, which is the most artwork
+ *      I've drawn in years.
+ *  - 
  *********************************************************************/
 
 'use strict';
@@ -41,6 +45,17 @@ let textConfig = {
     fontFamily: 'Courier',
     fontSize: '24px',
     color: '#000',
+}
+
+let resultsConfig = {
+    fontFamily: 'Courier',
+    fontSize: '24px',
+    color: '#000',
+    backgroundColor: '#1e90ff',
+    padding: {
+        top: 5,
+        bottom: 5,
+    },
 }
 
 const game = new Phaser.Game(config);
