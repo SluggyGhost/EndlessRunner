@@ -53,5 +53,5 @@ let h = game.config.height;
 var highScore = 0;  // default value (global access)
 let titleHeight = 36;
 let textHeight = 24;
-let musicMuted = false;
-let sfxMuted = false;
+var musicOn = true;
+var sfxOn = true;

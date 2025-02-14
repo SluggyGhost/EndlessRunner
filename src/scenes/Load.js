@@ -29,6 +29,8 @@ class Load extends Phaser.Scene {
             frameWidth: 29,
             frameHeight: 25,
         })
+        this.load.image('toggleOn', 'sprites/toggleOn.png')
+        this.load.image('toggleOff', 'sprites/toggleOff.png')
         // load audio assets
         this.load.audio('bgMusic', 'audio/ThreeRedHearts-Go(NoVocal).ogg')
         this.load.audio('wind', 'audio/wind.wav')

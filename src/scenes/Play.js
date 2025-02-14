@@ -107,7 +107,7 @@ class Play extends Phaser.Scene {
             localStorage.setItem('highScore', highScore)
         }
 
-        console.log('Collision detected!')
+        // console.log('Collision detected!')
         console.log(highScore)
         player.setTint(0xff0000)
         this.physics.pause()
