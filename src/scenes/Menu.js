@@ -8,18 +8,6 @@ class Menu extends Phaser.Scene {
     preload() {}
 
     create() {
-        let titleConfig = {
-            fontFamily: 'Courier',
-            fontSize: '36px',
-            color: '#ffe135',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
-
         this.add.rectangle(centerX, centerY, w, h, 0x87ceeb)
         this.add.text(centerX, centerY / 2, 'INFINITE SKY', titleConfig).setOrigin(0.5)
 

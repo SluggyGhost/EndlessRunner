@@ -25,6 +25,24 @@ let config = {
     scene: [ Load, Menu, HowTo, Credits, Options, Play]
 }
 
+let titleConfig = {
+    fontFamily: 'Courier',
+    fontSize: '36px',
+    color: '#ffe135',
+    align: 'right',
+    padding: {
+        top: 5,
+        bottom: 5,
+    },
+    fixedWidth: 0
+}
+
+let textConfig = {
+    fontFamily: 'Courier',
+    fontSize: '24px',
+    color: '#000',
+}
+
 const game = new Phaser.Game(config);
 
 // define global variables
@@ -33,3 +51,7 @@ let centerY = game.config.height/2;
 let w = game.config.width;
 let h = game.config.height;
 var highScore = 0;  // default value (global access)
+let titleHeight = 36;
+let textHeight = 24;
+let musicMuted = false;
+let sfxMuted = false;
